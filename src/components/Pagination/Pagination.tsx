@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
-import PropTypes from 'prop-types';
 import { FlexBox } from '@ui5/webcomponents-react/lib/FlexBox';
 import { FlexBoxAlignItems } from '@ui5/webcomponents-react/lib/FlexBoxAlignItems';
 import { Button } from '@ui5/webcomponents-react/lib/Button';
@@ -8,7 +7,16 @@ import { ButtonDesign } from '@ui5/webcomponents-react/lib/ButtonDesign';
 import { FlexBoxJustifyContent } from '@ui5/webcomponents-react/lib/FlexBoxJustifyContent';
 import { spacing } from '@ui5/webcomponents-react-base';
 
-export const Pagination = ({ shouldDisableAll, numberOfElements, totalPages, selectedPage, setPage, style = spacing.sapUiMediumMargin }) => {
+interface PaginationProps {
+  shouldDisableAll: boolean;
+  numberOfElements: number;
+  totalPages: number;
+  selectedPage: number;
+  setPage: (page: number) => void;
+  style?: CSSProperties;
+}
+
+export const Pagination: React.FC<PaginationProps> = ({ shouldDisableAll, numberOfElements, totalPages, selectedPage, setPage, style = spacing.sapUiMediumMargin }) => {
   if (!numberOfElements) return null;
 
   let disablePrevious = false;
@@ -81,11 +89,4 @@ export const Pagination = ({ shouldDisableAll, numberOfElements, totalPages, sel
       </Button>
     </FlexBox>
   );
-};
-
-Pagination.propTypes = {
-  totalItems: PropTypes.number,
-  totalPages: PropTypes.number,
-  selectedPage: PropTypes.number,
-  setPage: PropTypes.func,
 };
