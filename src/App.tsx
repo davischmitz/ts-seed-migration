@@ -10,7 +10,7 @@ import Routes from './routes/Routes';
 
 import './App.css';
 
-const App = () => {
+const App: React.FC = () => {
   const { t } = useTranslation();
 
   return (

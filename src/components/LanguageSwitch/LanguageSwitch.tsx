@@ -1,8 +1,7 @@
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Option } from '@ui5/webcomponents-react/lib/Option';
-import { Select } from '@ui5/webcomponents-react/lib/Select';
+import { Option, Select } from '@ui5/webcomponents-react';
 import i18n, { getSupportedLanguageResources } from '../../util/i18n';
 
 const style = {
@@ -11,10 +10,10 @@ const style = {
   },
 };
 
-const LanguageSwitch = () => {
+const LanguageSwitch: React.FC = () => {
   const { t } = useTranslation();
 
-  const onChange = useCallback((event) => {
+  const onChange = useCallback((event: CustomEvent): void => {
     i18n.changeLanguage(event.detail.selectedOption.dataset.code);
   }, []);
 

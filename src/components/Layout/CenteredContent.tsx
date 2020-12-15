@@ -1,4 +1,5 @@
 import React from 'react';
+// @ts-ignore
 import { isMobile } from '@ui5/webcomponents-base/dist/Device';
 
 const style = {
@@ -9,10 +10,10 @@ const style = {
   },
 };
 
-const CenteredContent = (props) => {
+const CenteredContent: React.FC = ({ children }) => {
   return (
-    <div data-testid="centered-content" style={style.centered} {...props}>
-      {props.children}
+    <div data-testid="centered-content" style={style.centered}>
+      {children}
     </div>
   );
 };
