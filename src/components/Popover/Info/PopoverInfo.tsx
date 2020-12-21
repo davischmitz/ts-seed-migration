@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Ref } from 'react';
 
 import { Popover } from '@ui5/webcomponents-react/lib/Popover';
 import { PlacementType } from '@ui5/webcomponents-react/lib/PlacementType';
@@ -7,7 +7,13 @@ import { Title } from '@ui5/webcomponents-react/lib/Title';
 import { FlexBox } from '@ui5/webcomponents-react/lib/FlexBox';
 import { spacing } from '@ui5/webcomponents-react-base';
 
-const PopoverInfo = ({ popoverRef, placementType = PlacementType.Bottom, title, ...props }) => {
+interface PopoverInfoProps {
+  popoverRef: Ref<any>;
+  placementType?: PlacementType;
+  title: string;
+}
+
+const PopoverInfo: React.FC<PopoverInfoProps> = ({ popoverRef, placementType = PlacementType.Bottom, title, children }) => {
   return (
     <Popover data-testid="popoverInfo-wrapper" ref={popoverRef} placementType={placementType}>
       <FlexBox direction={FlexBoxDirection.Column}>
@@ -18,7 +24,7 @@ const PopoverInfo = ({ popoverRef, placementType = PlacementType.Bottom, title, 
             </Title>
           )}
         </div>
-        <div className="popover-content">{props.children}</div>
+        <div className="popover-content">{children}</div>
       </FlexBox>
     </Popover>
   );

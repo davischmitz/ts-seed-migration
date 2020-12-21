@@ -8,7 +8,14 @@ import { spacing } from '@ui5/webcomponents-react-base';
 
 import i18n from '../../util/i18n';
 
-const NavBack = ({ text = i18n.t('components.navback.text'), icon = 'nav-back', design = ButtonDesign.Transparent, disabled = false }) => {
+interface NavBackProps {
+  text: string;
+  icon: string;
+  design: ButtonDesign;
+  disabled: boolean;
+}
+
+const NavBack: React.FC<NavBackProps> = ({ text = i18n.t('components.navback.text'), icon = 'nav-back', design = ButtonDesign.Transparent, disabled = false }) => {
   const history = useHistory();
 
   return (

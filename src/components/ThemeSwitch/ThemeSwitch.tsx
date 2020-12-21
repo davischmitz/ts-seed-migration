@@ -3,8 +3,13 @@ import { useTranslation } from 'react-i18next';
 
 import { Option } from '@ui5/webcomponents-react/lib/Option';
 import { Select } from '@ui5/webcomponents-react/lib/Select';
+// @ts-ignore
 import { setTheme } from '@ui5/webcomponents-base/dist/config/Theme.js';
 import Constants from '../../util/Constants';
+
+interface ThemeSwitchProps {
+  storedTheme?: string;
+}
 
 const style = {
   select: {
@@ -20,14 +25,14 @@ const themeOptions = [
   { value: 'sap_fiori_3_hcw', title: 'shell.button.user.settings.item.themeSwitch.option.highContrastWhite' },
 ];
 
-const ThemeSwitch = ({ storedTheme = localStorage.getItem(Constants.SEED.SELECTED_THEME) }) => {
+const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ storedTheme = localStorage.getItem(Constants.SEED.SELECTED_THEME) }) => {
   const { t } = useTranslation();
 
   useEffect(() => {
     setTheme(storedTheme ? storedTheme : themeOptions[0].value);
   }, [storedTheme]);
 
-  const onChange = (event) => {
+  const onChange = (event: CustomEvent) => {
     localStorage.setItem(Constants.SEED.SELECTED_THEME, event.detail.selectedOption.dataset.value);
     setTheme(event.detail.selectedOption.dataset.value);
   };

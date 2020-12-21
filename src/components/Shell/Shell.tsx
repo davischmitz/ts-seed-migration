@@ -11,6 +11,13 @@ import PopoverListItems from '../Popover/List/PopoverListItems';
 import ThemeSwitch from '../ThemeSwitch/ThemeSwitch';
 import LanguageSwitch from '../LanguageSwitch/LanguageSwitch';
 
+import { Ui5PopoverDomRef } from '@ui5/webcomponents-react/interfaces/Ui5PopoverDomRef';
+
+interface ShellProps {
+  title: string;
+  [props: string]: any;
+}
+
 const style = {
   shell: {
     position: 'fixed',
@@ -22,10 +29,10 @@ const style = {
   },
 };
 
-const Shell = ({ title, ...props }) => {
+const Shell: React.FC<ShellProps> = ({ title, ...props }) => {
   const { t } = useTranslation();
   const history = useHistory();
-  const popoverConfigItemsRef = useRef(null);
+  const popoverConfigItemsRef = useRef<Ui5PopoverDomRef>(null);
   const popoverItems = useMemo(
     () => [
       {
@@ -47,11 +54,10 @@ const Shell = ({ title, ...props }) => {
       <ShellBar
         data-testid="shell-wrapper"
         primaryTitle={title}
-        style={style.shell}
         logo={<img alt={t('shell.logo.alt')} src="https://sap.github.io/ui5-webcomponents/assets/images/sap-logo-svg.svg" />}
         onLogoClick={() => history.push(getUrl('HOME'))}
         profile={<Avatar icon="customer" shape={AvatarShape.Circle} size={AvatarSize.S} />}
-        onProfileClick={(e) => popoverConfigItemsRef.current.openBy(e.detail.targetRef)}
+        onProfileClick={(e: CustomEvent) => popoverConfigItemsRef?.current?.openBy(e.detail.targetRef)}
         {...props}
       />
       <div data-testid="emptySpace-wrapper" style={style.emptySpace} />
